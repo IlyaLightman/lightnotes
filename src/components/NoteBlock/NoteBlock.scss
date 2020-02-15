@@ -1,0 +1,20 @@
+.NoteBlock {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+
+    h2 {
+        margin-top: 2px
+    }
+
+    p {
+        color: gray;
+    }
+
+    &:hover {
+        p {
+            color: black;
+        }
+    }
+}
