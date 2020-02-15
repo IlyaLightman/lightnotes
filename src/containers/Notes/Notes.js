@@ -5,6 +5,23 @@ import Radium from 'radium'
 import NoteBlock from '../../components/NoteBlock/NoteBlock'
 
 class Notes extends Component {
+    notesRender = columns => {
+        const notes = this.props.notes.map((note, index) => {
+            return <NoteBlock 
+                        note = {note}
+                        key = {index}
+                   />
+        })
+
+        console.log(columns, notes)
+
+        return (
+            <div>
+                {notes}
+            </div>
+        )
+    }
+
     render() {
         console.log(this.props)
 
@@ -12,11 +29,13 @@ class Notes extends Component {
             <div>
                 <h2>Заметочки: </h2>
                 <h3> { this.props.notes[0].title } </h3>
-                <p> {this.props.notes[0].text} </p>
-                <NoteBlock 
+                <p> { this.props.notes[0].text } </p>
+                <NoteBlock
                     background = 'lightyellow'
                     note = {this.props.notes[0]}
                 />
+
+                { this.notesRender(this.props.noteColumns) }
 
             </div>
         )
@@ -24,8 +43,6 @@ class Notes extends Component {
 }
 
 function mapStateToProps(state) {
-    console.log(state)
-
     return {
         notes: state.notes.notes
     }

@@ -3,10 +3,19 @@ const initialState = {
         {
             title: 'Заметка',
             text: 'Текст заметки',
-            logo: '' // Значок, ещё будут цвета
+            logo: '', // Значок, ещё будут цвета
+            background: 'lightblue',
+            hoverBackground: 'cyan'
+        },
+        {
+            title: 'Заметка 2',
+            text: 'Заметочка :3',
+            logo: '', // Значок, ещё будут цвета
+            background: 'pink',
+            hoverBackground: 'lightblue'
         }
     ],
-    count: 17
+    noteColumns: 4
 }
 
 export default function notesReducer(state = initialState, action) {

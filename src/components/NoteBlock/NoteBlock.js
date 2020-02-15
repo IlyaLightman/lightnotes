@@ -11,12 +11,12 @@ let baseStyle = {
 };
 
 const NoteBlock = props => {
-  if (props.background) {
-      baseStyle.background = props.background
+  if (props.note.background) {
+      baseStyle.background = props.note.background
   }
 
-  if (props.hoverBackground) {
-      baseStyle[":hover"].background = props.hoverBackground
+  if (props.note.hoverBackground) {
+      baseStyle[":hover"].background = props.note.hoverBackground
   }
 
   return (
