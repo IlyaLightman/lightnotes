@@ -1,3 +1,5 @@
+import { EDIT_COLUMNS } from "../actions/actionTypes"
+
 const initialState = {
     notes: [
         {
@@ -23,10 +25,10 @@ const initialState = {
         },
         {
             title: 'О собачках',
-            text: 'Ну тоже миленькие',
+            text: 'Тоже миленькие, конечно не настолько, как котики, но как бы сойдёт. Сойдёт. Да',
             logo: '', // Значок, ещё будут цвета
-            background: 'pink',
-            hoverBackground: 'lightyellow'
+            background: 'lightyellow',
+            hoverBackground: 'pink'
         },
         {
             title: 'Но котики лучше!',
@@ -41,6 +43,11 @@ const initialState = {
 
 export default function notesReducer(state = initialState, action) {
     switch (action.type) {
+        case EDIT_COLUMNS:
+            console.log(action.columns)
+            return {
+                ...state, noteColumns: action.columns
+            }
         default:
             return state
     }

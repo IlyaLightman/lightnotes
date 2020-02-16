@@ -1,0 +1,35 @@
+.Notes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    
+    .menu {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        background-color: #ebddcb;
+
+        button {
+            border: 0.5px solid black;
+            border-radius: 50%;
+            background: lightyellow;
+            height: 75%;
+            
+            &:hover {
+                background: #ebddcb;
+            }
+
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        width: 70%;
+    }
+}

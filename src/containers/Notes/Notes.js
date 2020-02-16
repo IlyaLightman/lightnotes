@@ -3,6 +3,7 @@ import './Notes.scss'
 import { connect } from 'react-redux'
 import Radium from 'radium'
 import NoteBlock from '../../components/NoteBlock/NoteBlock'
+import { editColumns } from '../../store/actions/notes'
 
 class Notes extends Component {
     notesRender = columns => {
@@ -45,23 +46,38 @@ class Notes extends Component {
                 note = {note}
                 key = {key}
                 width = {width}
+                logo = 'fas fa-chart-line'
             />
         )
     }
 
     render() {
         return (
-            <div>
-                <h2>Заметочки: </h2>
-                <h3> { this.props.notes[0].title } </h3>
-                <p> { this.props.notes[0].text } </p>
-                <NoteBlock
-                    background = 'lightyellow'
-                    note = {this.props.notes[0]}
-                />
+            <div className='Notes'>
+                <div className='menu'>
+                    <p style={{margin: 5, marginLeft: 45}}>Заметок в строчке: </p>
+                    <button 
+                        style={{marginLeft: 10}}
+                        onClick={() => this.props.editColumns(2)}
+                    >2</button>
+                    <button 
+                        style={{marginLeft: 4}}
+                        onClick={() => this.props.editColumns(3)}
+                    >3</button>
+                    <button 
+                        style={{marginLeft: 4}}
+                        onClick={() => this.props.editColumns(4)}
+                    >4</button>
+                </div>
+                <h1>Список дел и заметок</h1>
+                <div className='content'>
+                    <h2>Заметочки: </h2>
 
-                { this.notesRender(this.props.noteColumns) }
+                    { this.notesRender(this.props.noteColumns) }
 
+                <h2>TODO: </h2>
+
+                </div>
             </div>
         )
     }
@@ -76,7 +92,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-
+        editColumns: columns => dispatch(editColumns(columns))
     }
 }
 

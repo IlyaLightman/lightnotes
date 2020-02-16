@@ -1,35 +1,75 @@
-import React from 'react'
-import './NoteBlock.scss'
-import Radium from 'radium'
+import React, { Component } from 'react';
+import './NoteBlock.scss';
+import Radium from 'radium';
 
 let baseStyle = {
   background: 'white',
 
   ':hover': {
-    background: 'lightgreen'
+    background: 'lightgreen',
+    cursor: 'pointer'
   }
 };
 
-const NoteBlock = props => {
-  if (props.note.background) {
-      baseStyle.background = props.note.background
+// ? Преобразование описание к коротенькому с тремя точечками в конце
+const textView = (text, length) => {
+  const words = text.split(' ');
+  let totalLength = 0;
+
+  const string = words.filter(word => {
+    totalLength += word.length;
+    return totalLength < length;
+  });
+
+  let toReturn = string.join(' ');
+
+  if (toReturn[toReturn.length - 1] === ',' || '?' || '!' || '.') {
+    toReturn = toReturn.slice(0, -1);
   }
 
-  if (props.note.hoverBackground) {
-      baseStyle[":hover"].background = props.note.hoverBackground
-  }
-
-  return (
-    <div>
-      <div style={{...baseStyle, width : props.width}} key={'1'}
-           className='NoteBlock'>
-        <h2>{props.note.title}</h2>
-        <p>
-          {props.note.text}
-        </p>
-      </div>
-    </div>
-  );
+  return toReturn + '...';
 };
+
+class NoteBlock extends Component {
+  state = {
+    currLogo: this.props.logo
+  }
+
+  render() {
+    if (this.props.note.background) {
+      baseStyle.background = this.props.note.background;
+    }
+
+    if (this.props.note.hoverBackground) {
+      baseStyle[':hover'].background = this.props.note.hoverBackground;
+    }
+
+    return (
+      <React.Fragment>
+        <div
+          style={{ ...baseStyle, width: this.props.width }}
+          key={'1'}
+          className="NoteBlock"
+          onMouseOver={() => this.setState({
+            currLogo: 'far fa-arrow-alt-circle-right'
+          })}
+          onMouseOut={() => this.setState({
+            currLogo: this.props.logo
+          })}
+        >
+          <h2>{this.props.note.title}</h2>
+          <p>
+            {this.props.note.text.length > 20
+              ? textView(this.props.note.text, 17)
+              : this.props.note.text}
+          </p>
+          <div>
+            <i style={{ fontSize: 25 }} className={this.state.currLogo}></i>
+          </div>
+        </div>
+      </React.Fragment>
+    );
+  }
+}
 
 export default Radium(NoteBlock);
