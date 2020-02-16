@@ -21,7 +21,7 @@ const NoteBlock = props => {
 
   return (
     <div>
-      <div style={baseStyle} key={'1'}
+      <div style={{...baseStyle, width : props.width}} key={'1'}
            className='NoteBlock'>
         <h2>{props.note.title}</h2>
         <p>

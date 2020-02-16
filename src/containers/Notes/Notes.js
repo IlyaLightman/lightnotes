@@ -6,25 +6,50 @@ import NoteBlock from '../../components/NoteBlock/NoteBlock'
 
 class Notes extends Component {
     notesRender = columns => {
-        const notes = this.props.notes.map((note, index) => {
-            return <NoteBlock 
-                        note = {note}
-                        key = {index}
-                   />
+        const rows = Math.ceil(this.props.notes.length / columns)
+
+        const notes = []
+        for (let i = 0; i < rows; i++) {
+            notes.push([])
+        }
+
+        this.props.notes.forEach((note, index) => {
+            notes[Math.floor(index / columns)].push(note)
         })
 
-        console.log(columns, notes)
+        return (
+            notes.map((row, rowIndex) => {
+                return (
+                    <div 
+                        style = {{display: 'flex', flexDirection: 'row'}}
+                        key = {`${row}0${rowIndex}`}
+                    >
+                    {
+                        notes[rowIndex].map((note, index) => {
+                            const key = `${rowIndex}0${index}`
+                            return this.createBlock(note, key)
+                        })
+                    }
+                    </div>
+                )
+            })
+        )
+    }
+
+    createBlock = (note, key) => {
+        const width = 70 / this.props.noteColumns + 'vw'
+        console.log(width)
 
         return (
-            <div>
-                {notes}
-            </div>
+            <NoteBlock
+                note = {note}
+                key = {key}
+                width = {width}
+            />
         )
     }
 
     render() {
-        console.log(this.props)
-
         return (
             <div>
                 <h2>Заметочки: </h2>
@@ -44,7 +69,8 @@ class Notes extends Component {
 
 function mapStateToProps(state) {
     return {
-        notes: state.notes.notes
+        notes: state.notes.notes,
+        noteColumns: state.notes.noteColumns
     }
 }
 
