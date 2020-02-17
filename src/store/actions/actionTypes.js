@@ -1,1 +1,2 @@
 export const EDIT_COLUMNS = 'EDIT_COLUMNS'
+export const CREATE_NOTE = 'CREATE_NOTE'

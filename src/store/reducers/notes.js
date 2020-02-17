@@ -1,4 +1,4 @@
-import { EDIT_COLUMNS } from "../actions/actionTypes"
+import { EDIT_COLUMNS, CREATE_NOTE } from "../actions/actionTypes"
 
 const initialState = {
     notes: [
@@ -44,9 +44,15 @@ const initialState = {
 export default function notesReducer(state = initialState, action) {
     switch (action.type) {
         case EDIT_COLUMNS:
-            console.log(action.columns)
             return {
                 ...state, noteColumns: action.columns
+            }
+        case CREATE_NOTE:
+            const currNotes = [ ...state.notes ]
+            currNotes.push(action.note)
+
+            return {
+                ...state, notes: currNotes
             }
         default:
             return state

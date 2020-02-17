@@ -17,6 +17,7 @@ const Input = props => {
                 value={props.value}
                 onChange={props.onChange}
                 type='text'
+                // style={{height: +props.height * 30}}
             />
         </div>
     )
