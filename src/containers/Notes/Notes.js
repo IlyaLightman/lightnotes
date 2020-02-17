@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import './Notes.scss'
 import { connect } from 'react-redux'
 import Radium from 'radium'
+import {NavLink} from 'react-router-dom'
 import NoteBlock from '../../components/NoteBlock/NoteBlock'
 import { editColumns } from '../../store/actions/notes'
 
@@ -55,7 +56,7 @@ class Notes extends Component {
         return (
             <div className='Notes'>
                 <div className='menu'>
-                    <p style={{margin: 5, marginLeft: 45}}>Заметок в строчке: </p>
+                    <p style={{margin: '3px 5px 3px 25px'}}>Заметок в строчке: </p>
                     <button 
                         style={{marginLeft: 10}}
                         onClick={() => this.props.editColumns(2)}
@@ -69,14 +70,31 @@ class Notes extends Component {
                         onClick={() => this.props.editColumns(4)}
                     >4</button>
                 </div>
-                <h1>Список дел и заметок</h1>
-                <div className='content'>
-                    <h2>Заметочки: </h2>
+                    <h1>Список дел и заметок</h1>
+                    <div className='content'>
+                        <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}} key='note'>
+                            <h2>Заметочки: </h2>
+                            <NavLink style={{color: 'gray',
+                                        marginLeft: 'auto',
+                                        textDecoration: 'none',
+                                        fontSize: '25px'}}
+                                key='nt'
+                                to='/create'
+                            >Создать заметку</NavLink>
+                        </div>
 
-                    { this.notesRender(this.props.noteColumns) }
+                        { this.notesRender(this.props.noteColumns) }
 
-                <h2>TODO: </h2>
-
+                        <div style={{display: 'flex', flexDirection: 'row'}} key='todo'>
+                            <h2>TODO: </h2>
+                            <NavLink style={{color: 'gray',
+                                        marginLeft: 'auto',
+                                        textDecoration: 'none',
+                                        fontSize: '25px'}}
+                                key='nt'
+                                to='/'
+                            >Новая задача</NavLink>
+                        </div>
                 </div>
             </div>
         )

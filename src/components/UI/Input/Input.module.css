@@ -1,0 +1,20 @@
+.Input {
+    padding: 15px; 
+}
+
+.Input input {
+    border-radius: 5px;
+    outline: none;
+    width: 300px;
+    height: 30px;
+    border: 1px solid black;
+    padding-left: 10px;
+}
+
+.Input.invalid input {
+    border: 1px solid red;
+}
+
+.Input.invalid p {
+    color: red;
+}
