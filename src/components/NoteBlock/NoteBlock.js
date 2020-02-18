@@ -44,12 +44,6 @@ class NoteBlock extends Component {
       baseStyle[':hover'].background = this.props.note.hoverColor;
     }
 
-    if (!this.state.currLogo) {
-      this.setState({
-        currLogo: 'far fa-calendar-alt'
-      })
-    }
-
     return (
       <React.Fragment>
         <div

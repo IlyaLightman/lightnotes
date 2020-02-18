@@ -138,7 +138,6 @@ class NoteCreator extends React.Component {
     }
 
     render() {
-        console.log(this.logosRender())
         return (
             !this.state.isFinish ?
             <div className='NoteCreator'>

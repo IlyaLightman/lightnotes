@@ -40,7 +40,6 @@ class Notes extends Component {
 
     createBlock = (note, key) => {
         const width = 70 / this.props.noteColumns + 'vw'
-        console.log(width)
 
         return (
             <NoteBlock
