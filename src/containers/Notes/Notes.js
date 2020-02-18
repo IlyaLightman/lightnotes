@@ -5,6 +5,7 @@ import Radium from 'radium'
 import {NavLink} from 'react-router-dom'
 import NoteBlock from '../../components/NoteBlock/NoteBlock'
 import { editColumns } from '../../store/actions/notes'
+import axios from 'axios'
 
 class Notes extends Component {
     notesRender = columns => {
@@ -49,6 +50,12 @@ class Notes extends Component {
                 logo = {note.logo}
             />
         )
+    }
+
+    componentDidMount() {
+        axios.get('https://react-notes-fc95f.firebaseio.com/users/I1Y4L1GH7M4N/notes.json').then(promise => {
+            console.log(promise)
+        })
     }
 
     render() {
@@ -110,6 +117,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         editColumns: columns => dispatch(editColumns(columns))
+        // TODO Функцию для синхронизации с сервером при рендере
     }
 }
 

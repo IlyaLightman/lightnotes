@@ -4,7 +4,7 @@ import Input from '../../components/UI/Input/Input'
 import Textarea from '../../components/UI/Textarea/Textarea'
 import LogoBlock from './LogoBlock/LogoBlock'
 import { connect } from 'react-redux'
-import { createNote } from '../../store/actions/notes'
+import { createNote, noteToDatabase } from '../../store/actions/notes'
 import { Redirect } from 'react-router-dom'
 import Radium from 'radium'
 
@@ -116,8 +116,9 @@ class NoteCreator extends React.Component {
                 text: this.state.text,
                 logo: logos[this.state.activeLogo],
                 color: colors[this.state.activeColor],
-                haverColor: colors[this.state.activeColor - 1]
+                hoverColor: colors[this.state.activeColor - 1]
             }
+
             this.props.createNote(finalNote)
 
             this.setState({isFinish: true})
@@ -207,7 +208,8 @@ class NoteCreator extends React.Component {
 
 function mapDispatchToProps(dispatch) {
     return {
-        createNote: note => dispatch(createNote(note))
+        createNote: note => dispatch(createNote(note)),
+        // noteToDatabase: () => dispatch(noteToDatabase())
     }
 }
 
