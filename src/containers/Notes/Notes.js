@@ -47,7 +47,7 @@ class Notes extends Component {
                 note = {note}
                 key = {key}
                 width = {width}
-                logo = 'fas fa-chart-line'
+                logo = {note.logo}
             />
         )
     }

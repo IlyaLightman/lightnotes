@@ -36,15 +36,28 @@ class NoteCreator extends React.Component {
         text: '',
         tags: 'В разработке :(',
         logo: 'fas fa-exclamation-triangle',
-        color: 'white'
+        color: 'white',
+        isFinish: false,
+        activeLogo: 0,
+        activeColor: 0
     }
 
     logosRender = () => {
         return logos.map((logo, index) => {
             return (
-                <LogoBlock 
+                index === this.state.activeLogo
+                ?  <LogoBlock 
                     key={`logo${index}`}
                     logo={logo}
+                    active='true'
+                    id={index}
+                />
+                :  <LogoBlock 
+                    key={index}
+                    logo={logo}
+                    active='false'
+                    id={index}
+                    editLogo={(id) => this.setState({activeLogo: id})}
                 />
             )
         })
@@ -53,9 +66,21 @@ class NoteCreator extends React.Component {
     colorsRender = () => {
         return colors.map((color, index) => {
             return (
-                <LogoBlock 
+                index === this.state.activeColor
+                ?  <LogoBlock 
                     key={`logo${index}`}
+                    logo='fas fa-align-left'
                     background={color}
+                    active='true'
+                    id={index}
+                />
+                :  <LogoBlock 
+                    key={`logo${index}`}
+                    logo='fas fa-align-left'
+                    background={color}
+                    active='false'
+                    id={index}
+                    editColor={(id) => this.setState({activeColor: id})}
                 />
             )
         })
@@ -78,7 +103,7 @@ class NoteCreator extends React.Component {
         })
     }
 
-    textChangeHandler = (value) => {
+    textChangeHandler = value => {
         this.setState({
             text: value
         })
@@ -86,10 +111,16 @@ class NoteCreator extends React.Component {
 
     noteCreator = () => {
         if (this.state.title !== '' && this.state.text !== '') {
-            const finalNote = { ...this.state}
+            const finalNote = {
+                title: this.state.title,
+                text: this.state.text,
+                logo: logos[this.state.activeLogo],
+                color: colors[this.state.activeColor],
+                haverColor: colors[this.state.activeColor - 1]
+            }
             this.props.createNote(finalNote)
 
-            this.setState({color: 'go_back'})
+            this.setState({isFinish: true})
         } else {
             if (this.state.text === '') {
                 this.setState({
@@ -107,8 +138,9 @@ class NoteCreator extends React.Component {
     }
 
     render() {
+        console.log(this.logosRender())
         return (
-            this.state.color !== 'go_back' ?
+            !this.state.isFinish ?
             <div className='NoteCreator'>
                 <div className='content'>
                     <div style={{
@@ -151,7 +183,7 @@ class NoteCreator extends React.Component {
                     <p>Выберите значок для заметки</p>
                     <div style={{
                         width: '90%', display: 'flex', flexDirection: 'row',
-                        justifyContent: 'space-between'
+                        justifyContent: 'space-between', overflow: 'auto'
                     }}>
                         
                         { this.logosRender() }
@@ -161,7 +193,7 @@ class NoteCreator extends React.Component {
                     <p>Выберите цвет заметки</p>
                     <div style={{
                         width: '90%', display: 'flex', flexDirection: 'row',
-                        justifyContent: 'space-between'
+                        justifyContent: 'space-between', overflow: 'auto'
                     }}>
                         
                         { this.colorsRender() }

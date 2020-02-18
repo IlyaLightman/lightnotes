@@ -12,6 +12,7 @@ const Textarea = props => {
                 }}
                 value={props.value}
                 onChange={props.onChange}
+                type='text'
             />
         </div>
     )

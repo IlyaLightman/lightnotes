@@ -6,36 +6,36 @@ const initialState = {
             title: 'Заметка',
             text: 'Текст заметки',
             logo: '', // Значок, ещё будут цвета
-            background: 'lightblue',
-            hoverBackground: 'cyan'
+            color: 'lightblue',
+            hoverColor: 'cyan'
         },
         {
             title: 'Заметка 2',
             text: 'Заметочка :3',
             logo: '', // Значок, ещё будут цвета
-            background: 'pink',
-            hoverBackground: 'lightblue'
+            color: 'pink',
+            hoverColor: 'lightblue'
         },
         {
             title: 'О котиках',
             text: 'Котики милые',
             logo: '', // Значок, ещё будут цвета
-            background: 'lightskyblue',
-            hoverBackground: 'lightyellow'
+            color: 'lightskyblue',
+            hoverColor: 'lightyellow'
         },
         {
             title: 'О собачках',
             text: 'Тоже миленькие, конечно не настолько, как котики, но как бы сойдёт. Сойдёт. Да',
             logo: '', // Значок, ещё будут цвета
-            background: 'lightyellow',
-            hoverBackground: 'pink'
+            color: 'lightyellow',
+            hoverColor: 'pink'
         },
         {
             title: 'Но котики лучше!',
             text: 'Факт!',
             logo: '', // Значок, ещё будут цвета
-            background: 'white',
-            hoverBackground: 'lightgreen'
+            color: 'white',
+            hoverColor: 'lightgreen'
         }
     ],
     noteColumns: 4

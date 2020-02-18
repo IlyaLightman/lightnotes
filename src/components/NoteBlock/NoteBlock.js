@@ -36,12 +36,18 @@ class NoteBlock extends Component {
   }
 
   render() {
-    if (this.props.note.background) {
-      baseStyle.background = this.props.note.background;
+    if (this.props.note.color) {
+      baseStyle.background = this.props.note.color;
     }
 
-    if (this.props.note.hoverBackground) {
-      baseStyle[':hover'].background = this.props.note.hoverBackground;
+    if (this.props.note.hoverColor) {
+      baseStyle[':hover'].background = this.props.note.hoverColor;
+    }
+
+    if (!this.state.currLogo) {
+      this.setState({
+        currLogo: 'far fa-calendar-alt'
+      })
     }
 
     return (

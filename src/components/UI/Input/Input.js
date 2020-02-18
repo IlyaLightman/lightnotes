@@ -14,7 +14,7 @@ const Input = props => {
         <div className={cls.join(' ')}>
             <p>{props.title}</p>
             <input
-                value={props.value}
+                defaultValue={props.value}
                 onChange={props.onChange}
                 type='text'
                 // style={{height: +props.height * 30}}
