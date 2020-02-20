@@ -4,8 +4,7 @@ import { connect } from 'react-redux'
 import Radium from 'radium'
 import {NavLink} from 'react-router-dom'
 import NoteBlock from '../../components/NoteBlock/NoteBlock'
-import { editColumns } from '../../store/actions/notes'
-import axios from 'axios'
+import { editColumns, loadNotes } from '../../store/actions/notes'
 
 class Notes extends Component {
     notesRender = columns => {
@@ -53,9 +52,11 @@ class Notes extends Component {
     }
 
     componentDidMount() {
-        axios.get('https://react-notes-fc95f.firebaseio.com/users/I1Y4L1GH7M4N/notes.json').then(promise => {
-            console.log(promise)
-        })
+        // axios.get('https://react-notes-fc95f.firebaseio.com/users/I1Y4L1GH7M4N/notes.json').then(promise => {
+        //     console.log(promise)
+        // })
+
+        this.props.loadNotes('I1Y4L1GH7M4N') // Сюда передаётся ну вон та штука имя из бд
     }
 
     render() {
@@ -116,8 +117,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        editColumns: columns => dispatch(editColumns(columns))
+        editColumns: columns => dispatch(editColumns(columns)),
         // TODO Функцию для синхронизации с сервером при рендере
+        loadNotes: account => dispatch(loadNotes(account))
     }
 }
 

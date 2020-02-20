@@ -1,2 +1,3 @@
 export const EDIT_COLUMNS = 'EDIT_COLUMNS'
 export const CREATE_NOTE = 'CREATE_NOTE'
+export const LOAD_NOTES_SUCCESS = 'LOAD_NOTES_SUCCESS'

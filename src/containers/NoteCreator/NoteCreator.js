@@ -4,7 +4,7 @@ import Input from '../../components/UI/Input/Input'
 import Textarea from '../../components/UI/Textarea/Textarea'
 import LogoBlock from './LogoBlock/LogoBlock'
 import { connect } from 'react-redux'
-import { createNote, noteToDatabase } from '../../store/actions/notes'
+import { createNote } from '../../store/actions/notes'
 import { Redirect } from 'react-router-dom'
 import Radium from 'radium'
 
