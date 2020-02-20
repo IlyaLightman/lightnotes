@@ -11,6 +11,9 @@
 # production
 /build
 
+# data
+/src/axios
+
 # misc
 .DS_Store
 .env.local

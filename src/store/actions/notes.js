@@ -1,5 +1,6 @@
 import {EDIT_COLUMNS, CREATE_NOTE, LOAD_NOTES_SUCCESS, LOAD_NOTES_START} from './actionTypes'
 import axios from 'axios'
+import { baseURL } from '../../axios/axios-quiz'
 
 export function editColumns (columns) {
     return {
@@ -18,7 +19,7 @@ export function createNote (note) {
 }
 
 async function noteToDatabase (account, note) {
-    await axios.post(`https://react-notes-fc95f.firebaseio.com/users/${account}/notes.json`, note)
+    await axios.post(`${baseURL}/users/${account}/notes.json`, note)
 }
 
 export function loadNotes (account) {
@@ -26,7 +27,7 @@ export function loadNotes (account) {
         dispatch(loadNotesStart())
 
         const response = await axios.get(
-            `https://react-notes-fc95f.firebaseio.com/users/${account}/notes.json`
+            `${baseURL}/users/${account}/notes.json`
         )
 
         const notes = []
