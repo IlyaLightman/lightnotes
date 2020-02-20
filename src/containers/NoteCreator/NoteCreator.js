@@ -51,6 +51,7 @@ class NoteCreator extends React.Component {
                     logo={logo}
                     active='true'
                     id={index}
+                    editLogo={(id) => this.setState({activeLogo: id})}
                 />
                 :  <LogoBlock 
                     key={index}
@@ -73,6 +74,7 @@ class NoteCreator extends React.Component {
                     background={color}
                     active='true'
                     id={index}
+                    editColor={(id) => this.setState({activeColor: id})}
                 />
                 :  <LogoBlock 
                     key={`logo${index}`}

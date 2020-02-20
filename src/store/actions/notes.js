@@ -1,4 +1,4 @@
-import {EDIT_COLUMNS, CREATE_NOTE, LOAD_NOTES_SUCCESS} from './actionTypes'
+import {EDIT_COLUMNS, CREATE_NOTE, LOAD_NOTES_SUCCESS, LOAD_NOTES_START} from './actionTypes'
 import axios from 'axios'
 
 export function editColumns (columns) {
@@ -23,6 +23,8 @@ async function noteToDatabase (account, note) {
 
 export function loadNotes (account) {
     return async dispatch => {
+        dispatch(loadNotesStart())
+
         const response = await axios.get(
             `https://react-notes-fc95f.firebaseio.com/users/${account}/notes.json`
         )
@@ -47,5 +49,11 @@ export function loadNotesSuccess(notes) {
     return {
         type: LOAD_NOTES_SUCCESS,
         notes
+    }
+}
+
+export function loadNotesStart() {
+    return {
+        type: LOAD_NOTES_START,
     }
 }

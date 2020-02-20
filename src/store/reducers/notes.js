@@ -1,4 +1,4 @@
-import { EDIT_COLUMNS, CREATE_NOTE, LOAD_NOTES_SUCCESS } from "../actions/actionTypes"
+import { EDIT_COLUMNS, CREATE_NOTE, LOAD_NOTES_SUCCESS, LOAD_NOTES_START } from "../actions/actionTypes"
 
 const initialState = {
     notes: [
@@ -38,7 +38,8 @@ const initialState = {
         //     hoverColor: 'lightgreen'
         // }
     ],
-    noteColumns: 4
+    noteColumns: 4,
+    loading: true
 }
 
 export default function notesReducer(state = initialState, action) {
@@ -53,9 +54,13 @@ export default function notesReducer(state = initialState, action) {
             return {
                 ...state, notes: currNotes
             }
+        case LOAD_NOTES_START:
+            return {
+                ...state, loading: true
+            }
         case LOAD_NOTES_SUCCESS:
             return {
-                ...state, notes: action.notes
+                ...state, notes: action.notes, loading: false
             }
         default:
             return state
