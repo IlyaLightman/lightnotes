@@ -46,7 +46,7 @@ class NoteBlock extends Component {
 
     return (
       <React.Fragment>
-        <div
+        <div onClick = {this.props.onClick}
           style={{ ...baseStyle, width: this.props.width }}
           key={'1'}
           className="NoteBlock"

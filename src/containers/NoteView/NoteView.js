@@ -4,9 +4,9 @@ import { connect } from 'react-redux'
 const NoteView = props => {
     return (
         <div>
-            <h1>{props.notes[0].title}</h1>
-            <h1>{props.notes[1].title}</h1>
-            <h1>{props.notes[2].title}</h1>
+            <h1>{props.notes[props.noteId].title}</h1>
+            <h2>{props.notes[props.noteId].text}</h2>
+            <h3>{props.notes[props.noteId].logo}</h3>
         </div>
     )
 } // Ещё шоб стрелочки тудой сюдой смотреть соседние заметки

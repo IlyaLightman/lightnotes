@@ -6,8 +6,13 @@ import { NavLink } from 'react-router-dom';
 import NoteBlock from '../../components/NoteBlock/NoteBlock';
 import { editColumns, loadNotes } from '../../store/actions/notes';
 import Loader from '../../components/UI/Loader/Loader';
+import NoteView from '../NoteView/NoteView';
 
 class Notes extends Component {
+  state = {
+    redirectTo: -1
+  }
+
   notesRender = columns => {
     const rows = Math.ceil(this.props.notes.length / columns);
 
@@ -15,10 +20,12 @@ class Notes extends Component {
     for (let i = 0; i < rows; i++) {
       notes.push([]);
     }
-
+    
     this.props.notes.forEach((note, index) => {
-      notes[Math.floor(index / columns)].push(note);
+      notes[Math.floor(index / columns)].push({...note, ind: index});
     });
+
+    console.log(notes)
 
     return notes.map((row, rowIndex) => {
       return (
@@ -35,18 +42,31 @@ class Notes extends Component {
     });
   };
 
+  noteRedirect = noteId => {
+    this.setState({
+      redirectTo: noteId
+    })
+  }
+
   createBlock = (note, key) => {
     const width = 70 / this.props.noteColumns + 'vw';
-
-    return <NoteBlock note={note} key={key} width={width} logo={note.logo} />;
+    return <NoteBlock note={note}
+      key={key} 
+      width={width} 
+      logo={note.logo} 
+      onClick={() => this.noteRedirect(note.ind)}
+      />;
   };
 
   componentDidMount() {
-    this.props.loadNotes('I1Y4L1GH7M4N'); // Сюда передаётся ну вон та штука имя из бд
+    this.props.loadNotes('I1Y4L1GH7M4N');  // Сюда передаётся ну вон та штука имя из бд
+    // ? Записочки берутся по вот этой штуке, которая будет подгружаться в бд при входе
   }
 
   render() {
+    console.log(this.props.notes)
     return (
+      this.state.redirectTo === -1 ?
       <div className="Notes">
         <div className="menu">
           <p style={{ margin: '3px 5px 3px 25px' }}>Заметок в строчке: </p>
@@ -117,6 +137,7 @@ class Notes extends Component {
           </div>
         </div>
       </div>
+      : <NoteView noteId={this.state.redirectTo}/>
     );
   }
 }
