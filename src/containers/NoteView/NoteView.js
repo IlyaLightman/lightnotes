@@ -1,14 +1,26 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-const NoteView = props => {
-    return (
-        <div>
-            <h1>{props.notes[props.noteId].title}</h1>
-            <h2>{props.notes[props.noteId].text}</h2>
-            <h3>{props.notes[props.noteId].logo}</h3>
-        </div>
-    )
+class NoteView extends React.Component {
+    state = {
+        currNoteId: this.props.noteId
+    }
+
+    render() {
+        const note = this.props.notes[this.state.currNoteId]
+
+        return (
+            <div>
+                <h1>{note.title}</h1>
+                <h2>{note.text}</h2>
+                <h3>{note.logo}</h3>
+
+                <button onClick={() =>
+                    this.setState({currNoteId: this.state.currNoteId + 1})}>next</button>
+                <button onClick={() => this.props.backFunc()}>back</button>
+            </div>
+        )
+    }
 } // Ещё шоб стрелочки тудой сюдой смотреть соседние заметки
 
 function mapStateToProps(state) {
@@ -17,4 +29,10 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(NoteView)
+function mapDispatchToProps(dispatch) {
+    return {
+        // TODO Тут короче можно будет удалить заметочку
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NoteView)

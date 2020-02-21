@@ -25,8 +25,6 @@ class Notes extends Component {
       notes[Math.floor(index / columns)].push({...note, ind: index});
     });
 
-    console.log(notes)
-
     return notes.map((row, rowIndex) => {
       return (
         <div
@@ -42,6 +40,7 @@ class Notes extends Component {
     });
   };
 
+  // Если передаём -1, то оно должно вернуть на список заметок
   noteRedirect = noteId => {
     this.setState({
       redirectTo: noteId
@@ -64,7 +63,6 @@ class Notes extends Component {
   }
 
   render() {
-    console.log(this.props.notes)
     return (
       this.state.redirectTo === -1 ?
       <div className="Notes">
@@ -137,7 +135,7 @@ class Notes extends Component {
           </div>
         </div>
       </div>
-      : <NoteView noteId={this.state.redirectTo}/>
+      : <NoteView noteId={this.state.redirectTo} backFunc={() => this.noteRedirect(-1)}/>
     );
   }
 }
