@@ -1,4 +1,5 @@
 import React from 'react'
+import './NoteView.scss'
 import { connect } from 'react-redux'
 
 class NoteView extends React.Component {
@@ -10,14 +11,39 @@ class NoteView extends React.Component {
         const note = this.props.notes[this.state.currNoteId]
 
         return (
-            <div>
-                <h1>{note.title}</h1>
-                <h2>{note.text}</h2>
-                <h3>{note.logo}</h3>
+            <div className='NoteView'>
+                
+                <div className='Note'>
+                    <div>
+                        <h1>{note.title}</h1>
+                        <p>{note.text}</p>
+                    </div>
 
-                <button onClick={() =>
-                    this.setState({currNoteId: this.state.currNoteId + 1})}>next</button>
-                <button onClick={() => this.props.backFunc()}>back</button>
+                    <div>
+                        <i style={{ fontSize: 25 }} className={note.logo}></i>
+                    </div>
+
+                    
+                </div>
+                <div className='Buttons'>
+                    <button onClick={() => {
+                        let currId = this.state.currNoteId - 1
+                        currId >= 0 ?
+                        this.setState({currNoteId: this.state.currNoteId - 1}) :
+                        this.setState({currNoteId: this.props.notes.length - 1})
+                    }}>Prev</button>
+
+                    <button onClick={() => this.props.backFunc()}>Back</button>
+
+                    <button onClick={() => {
+                        let currId = this.state.currNoteId + 1
+                        this.props.notes.length > currId ?
+                        this.setState({currNoteId: currId}) :
+                        this.setState({currNoteId: 0})
+                    }}>Next</button>
+                </div>
+                
+                
             </div>
         )
     }
